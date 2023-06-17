@@ -1,0 +1,18 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+  <h1>Register</h1>
+
+  <style>
+    .round-button {
+      border-radius: 10%;
+      /* Add any other desired styles */
+    }
+  </style>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="round-button">Register</button>
+  </form>
+{% endblock %}

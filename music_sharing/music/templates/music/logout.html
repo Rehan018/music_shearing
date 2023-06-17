@@ -1,0 +1,8 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+    <h2>Logged Out Successfully</h2>
+    <p>You have been logged out successfully. Thank you for using our music sharing platform.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+{% endblock %}

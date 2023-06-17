@@ -1,0 +1,59 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+  <h1>Music Sharing</h1>
+
+  {% if user.is_authenticated %}
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+    <p><a href="{% url 'profile' %}">Go to Profile</a></p> <!-- Add this line -->
+  {% else %}
+    <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a></p>
+  {% endif %}
+
+  <h3>Music Files:</h3>
+
+  <ul>
+    {% for music_file in music_files %}
+      <li>
+        {{ music_file.title }}
+        {% if music_file.user == user %}
+          (Uploaded by you)
+        {% endif %}
+        <br>
+        {% if music_file.access == 'public' %}
+          Public
+        {% elif music_file.access == 'private' %}
+          Private
+        {% else %}
+          Protected
+        {% endif %}
+        <br>
+        <audio controls>
+          <source src="{{ music_file.file.url }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  {% if user.is_authenticated %}
+    <h3>Upload Music:</h3>
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'upload_music' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Upload</button>
+    </form>
+
+    <h3>Upload Protected Music:</h3>
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'protected_music' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Upload</button>
+    </form>
+  {% endif %}
+{% endblock %}

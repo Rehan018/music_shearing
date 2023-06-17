@@ -1,0 +1,22 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+  <h1>Login</h1>
+
+  <style>
+    .round-button {
+      border-radius: 10%;
+      /* Add any other desired styles */
+    }
+  </style>
+
+  {% if form.errors %}
+    <p class="error">Invalid username or password.</p>
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}?next={% url 'home' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="round-button">Login</button>
+  </form>
+{% endblock %}
