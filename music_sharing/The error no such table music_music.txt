@@ -20,3 +20,7 @@ Follow the prompts to enter a username and password for the superuser.
 Once the migrations are applied and the superuser is created, start the development server again:
 
 3.python manage.py runserver
+
+4. i have created a speruser
+username:rehan
+pasword:Rehan@018
